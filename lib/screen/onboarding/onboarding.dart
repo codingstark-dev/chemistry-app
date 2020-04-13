@@ -1,3 +1,4 @@
+import 'package:chemistry/helper/route_constant.dart';
 import 'package:chemistry/main.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -10,12 +11,11 @@ class OnBoarding extends StatefulWidget {
 }
 
 class _OnBoardingState extends State<OnBoarding> {
-  final introKey = GlobalKey<IntroductionScreenState>();
   int firstPage;
+  final introKey = GlobalKey<IntroductionScreenState>();
+
   void _onIntroEnd(context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => HomePage()),
-    );
+    Navigator.of(context).pushNamed(MainHome);
   }
 
   Widget _buildImage(String assetName) {
@@ -31,13 +31,13 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     const bodyStyle = TextStyle(fontSize: 19.0);
-    const pageDecoration = const PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
-      bodyTextStyle: bodyStyle,
-      descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.white,
-      imagePadding: EdgeInsets.zero,
-    );
+    // const pageDecoration = const PageDecoration(
+    //   titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
+    //   bodyTextStyle: bodyStyle,
+    //   descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+    //   pageColor: Colors.white,
+    //   imagePadding: EdgeInsets.zero,
+    // );
 
     List<PageViewModel> pageon = [
       PageViewModel(
@@ -56,15 +56,15 @@ class _OnBoardingState extends State<OnBoarding> {
       PageViewModel(
         title: "Learn as you go",
         body:
-            "Download the Stockpile app and master the market with our mini-lesson.",
+            "Student fear in chemistry but, this app will shoutout all sillys problems",
         image: Padding(
           padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
           child: _buildImage('rocks'),
         ),
         decoration: PageDecoration(
-          titleTextStyle:
-              TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
-          bodyTextStyle: bodyStyle,
+          titleTextStyle: TextStyle(
+              fontSize: 28.0, fontWeight: FontWeight.w700, color: Colors.white),
+          bodyTextStyle: TextStyle(fontSize: 19.0, color: Colors.white),
           descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
           pageColor: Color(0xff309fb3),
           imagePadding: EdgeInsets.zero,
@@ -97,17 +97,21 @@ class _OnBoardingState extends State<OnBoarding> {
       //   decoration: pageDecoration,
       // ),
       PageViewModel(
-        title: "Title of last page",
-        bodyWidget: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text("Click on ", style: bodyStyle),
-            Icon(Icons.edit),
-            Text(" to edit a post", style: bodyStyle),
-          ],
+        title: "Good News!",
+        bodyWidget: Text(
+            "We are glad that we are providing this app ads free app!",
+            style: bodyStyle),
+        image: _buildImage('ads'),
+        decoration: PageDecoration(
+          titleTextStyle: TextStyle(
+            fontSize: 28.0,
+            fontWeight: FontWeight.w700,
+          ),
+          bodyTextStyle: TextStyle(fontSize: 19.0, color: Colors.white),
+          descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+          pageColor: Color(0xfff2f2f2),
+          imagePadding: EdgeInsets.zero,
         ),
-        image: _buildImage('books'),
-        decoration: pageDecoration,
       ),
     ];
 
@@ -191,9 +195,13 @@ class _OnBoardingState extends State<OnBoarding> {
         'Skip',
         style: TextStyle(color: (firstPage == 0) ? Colors.black : Colors.white),
       ),
-      next: Icon(Icons.arrow_forward,color: (firstPage == 0) ? Colors.black : Colors.white,),
+      next: Icon(
+        Icons.arrow_forward,
+        color: (firstPage == 0) ? Colors.black : Colors.white,
+      ),
       done: const Text('Done', style: TextStyle(fontWeight: FontWeight.w600)),
-      dotsDecorator: const DotsDecorator(
+      dotsDecorator: DotsDecorator(
+        activeColor: (firstPage == 1) ? Colors.white : Colors.black,
         size: Size(10.0, 10.0),
         color: Color(0xFFBDBDBD),
         activeSize: Size(22.0, 10.0),
